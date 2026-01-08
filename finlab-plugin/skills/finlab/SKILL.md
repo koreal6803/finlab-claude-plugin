@@ -228,7 +228,6 @@ This skill includes comprehensive reference documentation:
 | Execute orders to broker | [trading-reference.md](trading-reference.md) |
 | Setup broker account (Esun/Sinopac/Masterlink/Fubon) | [trading-reference.md](trading-reference.md) |
 | Calculate position from backtest | [trading-reference.md](trading-reference.md) |
-| Use Portfolio Management CLI | [trading-reference.md](trading-reference.md) |
 | Find strategy examples | [factor-examples.md](factor-examples.md) |
 | Calculate moving averages, trends | [dataframe-reference.md](dataframe-reference.md) |
 | Select top N stocks | [dataframe-reference.md](dataframe-reference.md) |
