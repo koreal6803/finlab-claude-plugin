@@ -4,10 +4,10 @@
 </p>
 
 <p align="center">
-  <img src="assets/banner.png" alt="FinLab Claude Plugin Banner" width="800">
+  <img src="assets/banner.png" alt="FinLab AI Plugin Banner" width="800">
 </p>
 
-# FinLab Claude Plugin
+# FinLab AI Plugin
 
 > AI 驅動的台股量化交易技能
 

@@ -4,10 +4,10 @@
 </p>
 
 <p align="center">
-  <img src="assets/banner.png" alt="FinLab Claude Plugin Banner" width="800">
+  <img src="assets/banner.png" alt="FinLab AI Plugin Banner" width="800">
 </p>
 
-# FinLab Claude Plugin
+# FinLab AI Plugin
 
 > AI-powered quantitative trading skill for Taiwan stock market (台股)
 
