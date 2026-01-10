@@ -336,6 +336,24 @@ cond = (收盤價 > upperband) & (收盤價.shift() < upperband.shift())
 
 # Breaking below Bollinger lower band
 cond = (收盤價 < lowerband) & (收盤價.shift() > lowerband.shift())
+
+# MACD golden cross
+macd, macd_signal, macd_hist = data.indicator("MACD", fastperiod=12, slowperiod=26, signalperiod=9)
+macd_golden = (macd > macd_signal) & (macd.shift() < macd_signal.shift())
+
+# MACD histogram turns positive
+macd_hist_positive = (macd_hist > 0) & (macd_hist.shift() < 0)
+
+# RSI oversold breakout (breaks above 30)
+rsi = data.indicator("RSI", timeperiod=14)
+rsi_oversold_breakout = (rsi > 30) & (rsi.shift() < 30)
+
+# RSI overbought breakdown (drops below 70)
+rsi_overbought_breakdown = (rsi < 70) & (rsi.shift() > 70)
+
+# KD low-level golden cross (K < 50)
+slowk, slowd = data.indicator("STOCH", fastk_period=9, slowk_period=3, slowk_matype=0, slowd_period=3, slowd_matype=0)
+kd_low_golden = (slowk > slowd) & (slowk.shift() < slowd.shift()) & (slowk < 50)
 ```
 
 ---
@@ -463,6 +481,14 @@ itt_trend = (itt > 200000).sustain(2)
 
 # Investment trust net buy > 200,000 shares for 2 consecutive days
 ict_trend = (投信買賣超股數 > 200000).sustain(2)
+
+# Three major institutional investors all buying (三大法人同買)
+外資 = data.get("institutional_investors_trading_summary:外陸資買賣超股數(不含外資自營商)")
+投信 = data.get("institutional_investors_trading_summary:投信買賣超股數")
+自營商 = data.get("institutional_investors_trading_summary:自營商買賣超股數(自行買賣)")
+三大法人同買 = (外資 > 0) & (投信 > 0) & (自營商 > 0)
+連續同買 = 三大法人同買.sustain(3)
+position = 外資[連續同買].is_largest(10)
 ```
 
 #### Shareholding Distribution
