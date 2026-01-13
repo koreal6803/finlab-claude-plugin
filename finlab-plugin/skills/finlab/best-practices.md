@@ -231,6 +231,19 @@ rsi = data.indicator("RSI", close, timeperiod=14)  # ERROR
 rsi = data.indicator("RSI", timeperiod=14)  # Automatically uses close
 ```
 
+### ❌ Don't Use Boolean Indexing with Mismatched Indices
+
+**Reason:** When extracting `.iloc[-1]` from DataFrames with different columns, the resulting Series have different indices. Boolean indexing then fails with `IndexingError`.
+
+```python
+# ❌ BAD - indices may not match
+selected = latest_pe[latest_combined]  # IndexingError
+
+# ✅ GOOD - align indices first
+common = latest_combined.index.intersection(latest_pe.index)
+selected = latest_pe.loc[common][latest_combined.loc[common]]
+```
+
 ---
 
 ## Preventing Future Data Pollution

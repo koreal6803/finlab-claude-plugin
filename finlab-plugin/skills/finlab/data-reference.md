@@ -40,6 +40,51 @@ eps = data.get('fundamental_features:每股盈餘')
 foreign_investment = data.get('institutional_investors_trading_summary:外陸資買賣超股數(不含外資自營商)')
 ```
 
+### Common Field Names
+
+| Term | Field |
+|------|-------|
+| EPS | `fundamental_features:每股稅後盈餘` |
+| 本益比 | `price_earning_ratio:本益比` |
+| 股價淨值比 | `price_earning_ratio:股價淨值比` |
+| 殖利率 | `price_earning_ratio:殖利率(%)` |
+| ROE | `fundamental_features:ROE稅後` |
+| 毛利率 | `fundamental_features:營業毛利率` |
+| 月營收 | `monthly_revenue:當月營收` |
+| 營收年增率 | `monthly_revenue:去年同月增減(%)` |
+
+---
+
+## Data Discovery
+
+Use `data.search()` to programmatically find datasets from the Data Catalog.
+
+```python
+data.search(keyword: str = None) -> list
+```
+
+| Parameter | Description |
+|-----------|-------------|
+| `keyword` | Optional. Filter datasets by keyword (case-insensitive substring match). Returns all if omitted. |
+
+**Returns:** List of `"table:column"` strings, usable directly with `data.get()`.
+
+**Examples:**
+```python
+from finlab import data
+
+# List all available datasets
+all_data = data.search()
+
+# Search by keyword
+data.search('收盤')    # ['price:收盤價']
+data.search('營收')    # ['monthly_revenue:當月營收', ...]
+
+# Use result with data.get()
+results = data.search('收盤')
+df = data.get(results[0])
+```
+
 ---
 
 ## Universe Filtering
