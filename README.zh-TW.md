@@ -15,9 +15,11 @@
 
 ### Cursor 用戶（一鍵安裝！）
 
-<a href="cursor://anysphere.cursor-deeplink/mcp/install?name=finlab&config=eyJ1cmwiOiJodHRwczovL2ZpbmxhYi1haS1wbHVnaW4ua29yZWFsNjgwMy53b3JrZXJzLmRldi9tY3AifQ%3D%3D">
-  <img src="https://cursor.com/deeplink/mcp-install-dark.svg" alt="Install in Cursor" height="32">
-</a>
+複製此連結到瀏覽器即可安裝：
+
+```
+cursor://anysphere.cursor-deeplink/mcp/install?name=finlab&config=eyJ1cmwiOiJodHRwczovL2ZpbmxhYi1haS1wbHVnaW4ua29yZWFsNjgwMy53b3JrZXJzLmRldi9tY3AifQ==
+```
 
 ### Cursor / Antigravity IDE 用戶（手動設定）
 
@@ -27,7 +29,7 @@
 {
   "mcpServers": {
     "finlab": {
-      "url": "https://finlab-ai.koreal6803.workers.dev/mcp"
+      "url": "https://finlab-ai-plugin.koreal6803.workers.dev/mcp"
     }
   }
 }
@@ -117,7 +119,7 @@ skill-porter convert ./finlab/skills/finlab --to gemini --output ./finlab-gemini
 {
   "mcpServers": {
     "finlab": {
-      "url": "https://finlab-ai.koreal6803.workers.dev/mcp"
+      "url": "https://finlab-ai-plugin.koreal6803.workers.dev/mcp"
     }
   }
 }
@@ -134,7 +136,7 @@ skill-porter convert ./finlab/skills/finlab --to gemini --output ./finlab-gemini
 {
   "mcpServers": {
     "finlab": {
-      "url": "https://finlab-ai.koreal6803.workers.dev/mcp"
+      "url": "https://finlab-ai-plugin.koreal6803.workers.dev/mcp"
     }
   }
 }

@@ -10,7 +10,7 @@
   "remotes": [
     {
       "type": "streamable-http",
-      "url": "https://finlab-ai.koreal6803.workers.dev/mcp"
+      "url": "https://finlab-ai-plugin.koreal6803.workers.dev/mcp"
     }
   ]
 }

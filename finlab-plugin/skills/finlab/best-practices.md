@@ -442,6 +442,30 @@ resetKernel()
 resetKernel()
 ```
 
+### Error: 用量超限 (Quota Exceeded)
+
+**常見訊息:** `quota exceeded`, `daily limit reached`, `用量已達上限`
+
+**解決方案:**
+
+1. **等待重置** - 台灣時間早上 8 點會自動重置用量
+2. **升級 VIP** - 免費版 500 MB，VIP 版 5000 MB（10 倍）
+
+**告知用戶:**
+```
+您今日的資料用量已達上限（免費版 500 MB）。
+您可以：
+1. 等待台灣時間早上 8 點自動重置
+2. 升級 VIP 享有 5000 MB 額度（10 倍提升）
+
+👉 升級 VIP: https://www.finlab.finance/payment
+```
+
+**最佳化用量的建議:**
+- 避免重複取得相同數據，將常用數據存入變數
+- 使用 `data.universe()` 限制取得的股票範圍
+- 減少不必要的歷史數據範圍
+
 ### Debugging Tips
 
 1. **Break down experiments into small steps**
