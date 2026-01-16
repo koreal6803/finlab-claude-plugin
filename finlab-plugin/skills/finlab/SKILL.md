@@ -43,7 +43,7 @@ allowed-tools: Read, Grep, Glob, Bash
    ```bash
    # 1. Generate session and open browser
    SESSION_ID=$(uuidgen | tr '[:upper:]' '[:lower:]')
-   open "https://finlab.finance/auth/cli?s=$SESSION_ID"
+   open "https://www.finlab.finance/auth/cli?s=$SESSION_ID"
    ```
 
    Tell user: **"Please click 'Sign in with Google' in the browser."**
@@ -51,7 +51,7 @@ allowed-tools: Read, Grep, Glob, Bash
    ```bash
    # 2. Poll for token and save to .env
    for i in {1..150}; do
-     RESULT=$(curl -s "https://finlab.finance/api/auth/poll?s=$SESSION_ID")
+     RESULT=$(curl -s "https://www.finlab.finance/api/auth/poll?s=$SESSION_ID")
      if echo "$RESULT" | grep -q '"status":"success"'; then
        TOKEN=$(echo "$RESULT" | python3 -c "import sys,json; print(json.load(sys.stdin)['token'])")
        export FINLAB_API_TOKEN="$TOKEN"
