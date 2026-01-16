@@ -41,17 +41,22 @@ allowed-tools: Read, Grep, Glob, Bash
    **If no token anywhere, authenticate the user:**
 
    ```bash
-   # 1. Generate session and open browser
-   SESSION_ID=$(uuidgen | tr '[:upper:]' '[:lower:]')
-   open "https://www.finlab.finance/auth/cli?s=$SESSION_ID"
+   # 1. Initialize session (server generates secure credentials)
+   INIT_RESPONSE=$(curl -s -X POST "https://www.finlab.finance/api/auth/cli/init")
+   SESSION_ID=$(echo "$INIT_RESPONSE" | python3 -c "import sys,json; print(json.load(sys.stdin)['sessionId'])")
+   POLL_SECRET=$(echo "$INIT_RESPONSE" | python3 -c "import sys,json; print(json.load(sys.stdin)['pollSecret'])")
+   AUTH_URL=$(echo "$INIT_RESPONSE" | python3 -c "import sys,json; print(json.load(sys.stdin)['authUrl'])")
+
+   # 2. Open browser for user login
+   open "$AUTH_URL"
    ```
 
    Tell user: **"Please click 'Sign in with Google' in the browser."**
 
    ```bash
-   # 2. Poll for token and save to .env
+   # 3. Poll for token with secret and save to .env
    for i in {1..150}; do
-     RESULT=$(curl -s "https://www.finlab.finance/api/auth/poll?s=$SESSION_ID")
+     RESULT=$(curl -s "https://www.finlab.finance/api/auth/poll?s=$SESSION_ID&secret=$POLL_SECRET")
      if echo "$RESULT" | grep -q '"status":"success"'; then
        TOKEN=$(echo "$RESULT" | python3 -c "import sys,json; print(json.load(sys.stdin)['token'])")
        export FINLAB_API_TOKEN="$TOKEN"
