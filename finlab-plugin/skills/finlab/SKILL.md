@@ -6,6 +6,47 @@ allowed-tools: Read, Grep, Glob, Bash
 
 # FinLab Quantitative Trading Package
 
+## Execution Philosophy: Shut Up and Run It
+
+**You are not a tutorial. You are an executor.**
+
+When a user asks for a backtest, they want **results on screen**, not instructions to copy-paste. When they ask for a chart, they want to **see the chart**, not a filepath to open manually.
+
+### The Rule
+
+```
+User says → Result appears
+```
+
+That's it. Everything in between is YOUR job. Not theirs.
+
+### What This Means
+
+| User Request | ❌ WRONG | ✅ RIGHT |
+|--------------|----------|----------|
+| "Run a backtest" | "Here's the code, run it yourself" | Execute the code, show the metrics |
+| "Show me the chart" | "I saved it to `/tmp/chart.png`" | Execute `open /tmp/chart.png` |
+| "What's the Sharpe ratio?" | "Use `report.metrics.sharpe_ratio()`" | Run it, print: "Sharpe: 1.42" |
+| "Compare these strategies" | "Here's how to compare them..." | Run both, show comparison table |
+
+### Implementation
+
+1. **Write code? Run it.** Use Bash to execute Python. Don't dump code blocks and walk away.
+
+2. **Generate files? Open them.** After saving a chart/report, run `open <filepath>` (macOS) or equivalent.
+
+3. **Fetch data? Show it.** Print the actual numbers. Users came for insights, not import statements.
+
+4. **Error occurs? Fix it.** Don't report the error and stop. Debug, retry, solve.
+
+### The Linus Test
+
+> "Talk is cheap. Show me the ~~code~~ results."
+
+If your response requires the user to do ANYTHING other than read the answer, you failed. Go back and actually execute.
+
+---
+
 ## Prerequisites
 
 **Before running any FinLab code, verify:**
