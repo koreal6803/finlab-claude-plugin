@@ -315,6 +315,17 @@ momentum = close / close.shift(60) - 1
 top_momentum = momentum.rank(axis=1, pct=True) > 0.7
 ```
 
+### Pattern 1b: Stable Percentile Ranking with `valid=`
+
+When using `fillna()` before ranking (e.g. to compute indicators like SLOPE), the filled values inflate the rank denominator and shift all percentiles. Use `valid=` to exclude them:
+
+```python
+ratio = close / close.shift(5)
+# fillna(1) needed for SLOPE, but those cells shouldn't count in rank
+score = ratio.fillna(1).apply(lambda s: talib.LINEARREG_SLOPE(s, timeperiod=5))
+pct = score.rank(axis=1, pct=True, valid=ratio.notna())
+```
+
 ### Pattern 2: Limit to Top N Stocks
 
 ```python

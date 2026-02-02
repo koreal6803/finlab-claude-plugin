@@ -300,12 +300,13 @@ Computes ranking across rows or columns. **Includes lookahead bias warning when 
 
 **Signature:**
 ```python
-rank(*args, **kwargs) -> FinlabDataFrame
+rank(*args, valid=None, **kwargs) -> FinlabDataFrame
 ```
 
 **Parameters:**
 - Same parameters as `pandas.DataFrame.rank()`
 - `axis` (int or str, default=0): Axis to rank along. **Warning: axis=0 may cause lookahead bias**
+- `valid` (DataFrame or Series of bool, optional): Only cells where `valid` is True participate in ranking. Cells where `valid` is False/NaN are set to NaN before ranking, so they do not affect the `pct=True` denominator. Common usage: after `fillna()`, pass the original `notna()` mask to prevent newly-listed or history-insufficient stocks from polluting percentile rankings.
 
 **Returns:**
 - FinlabDataFrame with rankings
@@ -321,6 +322,14 @@ pb_rank = pb.rank(axis=1, pct=True)
 
 # Select stocks in bottom 30% of P/B each day
 cheap = pb_rank < 0.3
+
+# Using valid= to exclude fillna'd stocks from rank denominator:
+close = data.get('price:收盤價')
+ratio = close / close.shift(5)
+# fillna(1) is needed for SLOPE computation, but those fake values
+# should not count in percentile ranking
+score = ratio.fillna(1).apply(some_func)
+score.rank(axis=1, pct=True, valid=ratio.notna())
 
 # WARNING: Time-series ranking triggers LookaheadWarning
 # This ranks each stock's current value against its future values
